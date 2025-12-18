@@ -10,6 +10,7 @@ public class Room {
     private final String roomId;
     private final String ownerId;
     private final List<String> players = new ArrayList<>();
+    private final long createdAt = System.currentTimeMillis();  // 방 생성 시간 (FIFO용)
 
     private final Set<Session> sessions = ConcurrentHashMap.newKeySet();
     private boolean gameStarted = false;
@@ -26,6 +27,10 @@ public class Room {
 
     public String getOwnerId() {
         return ownerId;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
     }
 
     public synchronized void addPlayer(String userId) {
